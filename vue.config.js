@@ -1,4 +1,18 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  transpileDependencies: true
+    // 禁用对依赖包的转译处理
+    transpileDependencies: false,
+    // 加载 Markdown 格式的文件
+    chainWebpack: config => {
+        config.module.rule('md')
+            .test(/\.md/)
+            .use('vue-loader')
+            .loader('vue-loader')
+            .end()
+            .use('vue-markdown-loader')
+            .loader('vue-markdown-loader/lib/markdown-compiler')
+            .options({
+                raw: true
+            })
+    }
 })
