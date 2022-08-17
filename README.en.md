@@ -1,36 +1,50 @@
-# leetcode
+<h1 align="center">🚀 leetcode</h1>
 
-#### Description
-LeetCode 算法题题解展示
+<p align="center">
+<a target="_blank" href="https://github.com/zhouboyi1998/leetcode"> 
+<img src="https://img.shields.io/github/stars/zhouboyi1998/leetcode?logo=github">
+</a>
+<a target="_blank" href="https://opensource.org/licenses/MIT"> 
+<img src="https://img.shields.io/badge/license-MIT-red"> 
+</a>
+<img src="https://img.shields.io/badge/Vue-3.2.13-mediumseagreen">
+<img src="https://img.shields.io/badge/Element Plus-2.2.13-blue">
+<img src="https://img.shields.io/badge/GitHub Markdown CSS-5.1.0-lightgray">
+<img src="https://img.shields.io/badge/Highlight.js-11.6.0-darkred">
+</p>
 
-#### Software Architecture
-Software architecture description
+### 📖 Language
 
-#### Installation
+[简体中文](./README.md) | English
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### ⌛ Start
 
-#### Instructions
+* Choose a Node package manager
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+#### Install dependencies
 
-#### Contribution
+```
+npm install
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+yarn install
+```
 
+#### Run serve
 
-#### Gitee Feature
+```
+npm run serve
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+yarn serve
+```
+
+#### Build deployment package
+
+```
+npm run build
+
+yarn build
+```
+
+### 📜 Licence
+
+[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022 周博义
