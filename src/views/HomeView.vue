@@ -1,32 +1,57 @@
 <template>
-    <div class="home">
-        <markdown class="markdown-body"></markdown>
-    </div>
+    <el-container class="app-wrapper">
+        <el-aside width="280px" class="sidebar-container">
+            <el-menu class="el-menu-vertical-demo" default-active="0000.Hello">
+                <el-menu-item
+                    v-for="name in nameList" :key="name" :index="name"
+                    @click="chooseMarkdown(name)"
+                >
+                    <p class="item">{{ name }}</p>
+                </el-menu-item>
+            </el-menu>
+        </el-aside>
+        <el-main>
+            <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
+        </el-main>
+    </el-container>
 </template>
 
-<script>
-// 查询 ../../public/markdown 文件夹, true 同时查询子目录, /\.md$/ 正则表达式匹配 markdown 文件
-const requireComponent = require.context('../../public/markdown', true, /\.md$/)
+<script setup>
+import { ref } from 'vue'
 
-// 存储所有获取到的 markdown 文件
+// 查询 /markdown 文件夹中的 Markdown 文件
+// true 同时查询子目录, 正则表达式匹配 .md 文件
+const requireComponent = require.context('../../markdown', true, /\.md$/)
+
+// 存储所有获取到的 Markdown 文件
 let markdownList = {}
 
-requireComponent.keys().forEach(fileName => {
+// Markdown 文件名列表
+let nameList = []
+
+requireComponent.keys().sort().forEach(fileName => {
     // 获取文件名
     let name = fileName.split('/').pop().replace(/\.\w+$/, '')
+    // 存储文件名
+    nameList.push(name)
     // 获取组件配置
     const config = requireComponent(fileName)
     // 若该组件是通过 export default 导出的, 优先使用 .default, 否则使用模块的根
     markdownList[name] = config.default || config
 })
 
-// 获取当前显示的 markdown 文件
-let Markdown = markdownList['one']
+// 当前 Markdown 文件的名称, 默认显示欢迎页
+let markdownName = ref('0000.Hello')
 
-export default {
-    name: 'HomeView',
-    components: {
-        Markdown
-    }
+// 切换 Markdown 文件
+const chooseMarkdown = (name) => {
+    markdownName.value = name
 }
 </script>
+
+<style scoped>
+.item {
+    font-weight: bold;
+    font-size: 16px;
+}
+</style>
