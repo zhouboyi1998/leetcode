@@ -1,6 +1,6 @@
 <template>
     <el-container class="app-wrapper">
-        <el-aside width="200px" class="sidebar-container">
+        <el-aside width="280px" class="sidebar-container">
             <el-menu class="el-menu-vertical-demo">
                 <el-menu-item
                     v-for="name in nameList" :key="name" :index="name"
@@ -29,7 +29,7 @@ let markdownList = {}
 // Markdown 文件名列表
 let nameList = []
 
-requireComponent.keys().forEach(fileName => {
+requireComponent.keys().sort().forEach(fileName => {
     // 获取文件名
     let name = fileName.split('/').pop().replace(/\.\w+$/, '')
     // 存储文件名
@@ -41,7 +41,7 @@ requireComponent.keys().forEach(fileName => {
 })
 
 // 当前 Markdown 文件的名称, 默认显示欢迎页
-let markdownName = ref('hello')
+let markdownName = ref('0000. Hello LeetCode')
 
 // 切换 Markdown 文件
 const chooseMarkdown = (name) => {
