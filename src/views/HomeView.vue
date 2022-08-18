@@ -1,7 +1,7 @@
 <template>
     <el-container class="app-wrapper">
         <el-aside width="280px" class="sidebar-container">
-            <el-menu class="el-menu-vertical-demo">
+            <el-menu class="el-menu-vertical-demo" default-active="0000.Hello">
                 <el-menu-item
                     v-for="name in nameList" :key="name" :index="name"
                     @click="chooseMarkdown(name)"
@@ -11,7 +11,7 @@
             </el-menu>
         </el-aside>
         <el-main>
-            <component v-bind:is="markdownList[markdownName]" class="markdown-body"/>
+            <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
         </el-main>
     </el-container>
 </template>
@@ -41,7 +41,7 @@ requireComponent.keys().sort().forEach(fileName => {
 })
 
 // 当前 Markdown 文件的名称, 默认显示欢迎页
-let markdownName = ref('0000. Hello LeetCode')
+let markdownName = ref('0000.Hello')
 
 // 切换 Markdown 文件
 const chooseMarkdown = (name) => {
