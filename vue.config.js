@@ -18,6 +18,7 @@ module.exports = defineConfig({
     // 开发配置
     devServer: {
         host: '127.0.0.1',
-        port: 18003
+        port: 18003,
+        open: true
     }
 })
