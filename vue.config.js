@@ -3,7 +3,8 @@ module.exports = defineConfig({
     transpileDependencies: true,
     devServer: {
         host: '127.0.0.1',
-        port: 18003
+        port: 18003,
+        open: true
     },
     chainWebpack: config => {
         config.module.rule('md')
