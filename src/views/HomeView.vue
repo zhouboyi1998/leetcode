@@ -14,7 +14,7 @@
                 </el-menu-item>
             </el-menu>
             <el-tag class="ml-2 tag" type="success" effect="dark" color="#00AF9B">
-                Note Total Number: {{ noteNumber }}
+                Note Total Number {{ noteNumber }}
             </el-tag>
         </el-aside>
         <el-main>
