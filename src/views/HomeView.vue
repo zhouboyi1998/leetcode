@@ -1,7 +1,11 @@
 <template>
     <el-container class="app-wrapper">
-        <el-aside width="280px" class="sidebar-container">
-            <el-menu class="el-menu-vertical-demo" default-active="0000.Hello">
+        <el-aside width="300px" class="sidebar-container">
+            <el-menu
+                class="el-menu-vertical-demo"
+                :default-active="hello"
+                active-text-color="#00AF9B"
+            >
                 <el-menu-item
                     v-for="name in nameList" :key="name" :index="name"
                     @click="chooseMarkdown(name)"
@@ -9,6 +13,9 @@
                     <p class="item">{{ name }}</p>
                 </el-menu-item>
             </el-menu>
+            <el-tag class="ml-2 tag" type="success" effect="dark" color="#00AF9B">
+                Note Total Number {{ noteNumber }}
+            </el-tag>
         </el-aside>
         <el-main>
             <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
@@ -40,8 +47,14 @@ requireComponent.keys().sort().forEach(fileName => {
     markdownList[name] = config.default || config
 })
 
-// 当前 Markdown 文件的名称, 默认显示欢迎页
-let markdownName = ref('0000.Hello')
+// 笔记数量
+let noteNumber = nameList.length - 1
+
+// 默认显示欢迎页
+let hello = '0000.Hello'
+
+// 当前 Markdown 文件的名称
+let markdownName = ref(hello)
 
 // 切换 Markdown 文件
 const chooseMarkdown = (name) => {
@@ -53,5 +66,10 @@ const chooseMarkdown = (name) => {
 .item {
     font-weight: bold;
     font-size: 16px;
+}
+
+.tag {
+    margin-left: 20px;
+    margin-top: 20px;
 }
 </style>
