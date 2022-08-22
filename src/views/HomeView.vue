@@ -40,7 +40,7 @@ let markdownList = {}
 // Markdown 文件名列表
 let nameList = []
 
-requireComponent.keys().sort().forEach(fileName => {
+requireComponent.keys().forEach(fileName => {
     // 获取文件名
     let name = fileName.split('/').pop().replace(/\.\w+$/, '')
     // 存储文件名
@@ -50,6 +50,9 @@ requireComponent.keys().sort().forEach(fileName => {
     // 若该组件是通过 export default 导出的, 优先使用 .default, 否则使用模块的根
     markdownList[name] = config.default || config
 })
+
+// 按文件名排序
+nameList = nameList.sort()
 
 // 笔记数量
 let noteNumber = nameList.length - 1
