@@ -1,6 +1,6 @@
 <template>
     <el-container class="app-wrapper">
-        <el-aside width="280px" class="sidebar-container">
+        <el-aside width="300px" class="sidebar-container">
             <el-menu
                 class="el-menu-vertical-demo"
                 :default-active="hello"
