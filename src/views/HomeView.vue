@@ -1,24 +1,28 @@
 <template>
     <el-container class="app-wrapper">
         <el-aside width="300px" class="sidebar-container">
-            <el-menu
-                class="el-menu-vertical-demo"
-                :default-active="hello"
-                active-text-color="#00AF9B"
-            >
-                <el-menu-item
-                    v-for="name in nameList" :key="name" :index="name"
-                    @click="chooseMarkdown(name)"
+            <el-scrollbar style="height: 100vh;">
+                <el-menu
+                    class="el-menu-vertical-demo"
+                    :default-active="hello"
+                    active-text-color="#00AF9B"
                 >
-                    <p class="item">{{ name }}</p>
-                </el-menu-item>
-            </el-menu>
-            <el-tag class="ml-2 tag" type="success" effect="dark" color="#00AF9B">
-                Note Total Number {{ noteNumber }}
-            </el-tag>
+                    <el-menu-item
+                        v-for="name in nameList" :key="name" :index="name"
+                        @click="chooseMarkdown(name)"
+                    >
+                        <p class="item">{{ name }}</p>
+                    </el-menu-item>
+                </el-menu>
+                <el-tag class="ml-2 tag" type="success" effect="dark" color="#00AF9B">
+                    Note Total Number {{ noteNumber }}
+                </el-tag>
+            </el-scrollbar>
         </el-aside>
         <el-main>
-            <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
+            <el-scrollbar style="height: 100vh;">
+                <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
+            </el-scrollbar>
         </el-main>
     </el-container>
 </template>
