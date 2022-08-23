@@ -1,7 +1,7 @@
 <template>
     <el-container class="app-wrapper">
-        <el-aside width="300px" class="sidebar-container">
-            <el-scrollbar style="height: 100vh;">
+        <el-aside width="320px" class="sidebar-container">
+            <el-scrollbar class="scrollbar">
                 <el-menu
                     class="el-menu-vertical-demo"
                     :default-active="hello"
@@ -37,7 +37,7 @@
             </el-scrollbar>
         </el-aside>
         <el-main>
-            <el-scrollbar style="height: 100vh;">
+            <el-scrollbar class="scrollbar">
                 <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
             </el-scrollbar>
         </el-main>
@@ -106,11 +106,12 @@ let hello = '0000.Hello'
 // 当前 Markdown 文件的名称
 let markdownName = ref(hello)
 
-// 切换 Markdown 文件
+// 侧边栏切换 Markdown 文件
 const chooseMarkdown = (name) => {
     markdownName.value = name
 }
 
+// 点击 Tag 标签触发通知
 const clickTag = (e) => {
     // 获取 el-tag 标签上的文本
     let text = e.currentTarget.children[0].outerText
@@ -150,6 +151,9 @@ const clickTag = (e) => {
         duration: 5000
     })
 }
+
+// 禁用浏览器的滚动条
+document.body.style.overflow = 'hidden'
 </script>
 
 <style scoped>
@@ -161,5 +165,9 @@ const clickTag = (e) => {
 .tag {
     margin-left: 20px;
     margin-top: 20px;
+}
+
+.scrollbar {
+    height: calc(100vh - 40px);
 }
 </style>
