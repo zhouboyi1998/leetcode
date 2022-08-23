@@ -1,7 +1,7 @@
 <template>
     <el-container class="app-wrapper">
         <el-aside width="300px" class="sidebar-container">
-            <el-scrollbar style="height: 100vh;">
+            <el-scrollbar class="scrollbar">
                 <el-menu
                     class="el-menu-vertical-demo"
                     :default-active="hello"
@@ -37,7 +37,7 @@
             </el-scrollbar>
         </el-aside>
         <el-main>
-            <el-scrollbar style="height: 100vh;">
+            <el-scrollbar class="scrollbar">
                 <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
             </el-scrollbar>
         </el-main>
@@ -150,6 +150,9 @@ const clickTag = (e) => {
         duration: 5000
     })
 }
+
+// 禁用浏览器的滚动条
+document.body.style.overflow = 'hidden'
 </script>
 
 <style scoped>
@@ -161,5 +164,9 @@ const clickTag = (e) => {
 .tag {
     margin-left: 20px;
     margin-top: 20px;
+}
+
+.scrollbar {
+    height: calc(100vh - 40px);
 }
 </style>
