@@ -1,4 +1,4 @@
-<h1 align="center">🚀 leetcode</h1>
+<h1 style="text-align: center;">🚀 leetcode</h1>
 
 <p align="center">
 <a target="_blank" href="https://github.com/zhouboyi1998/leetcode"> 
