@@ -106,11 +106,12 @@ let hello = '0000.Hello'
 // 当前 Markdown 文件的名称
 let markdownName = ref(hello)
 
-// 切换 Markdown 文件
+// 侧边栏切换 Markdown 文件
 const chooseMarkdown = (name) => {
     markdownName.value = name
 }
 
+// 点击 Tag 标签触发通知
 const clickTag = (e) => {
     // 获取 el-tag 标签上的文本
     let text = e.currentTarget.children[0].outerText
