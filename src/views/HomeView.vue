@@ -166,7 +166,13 @@ document.body.style.overflow = 'hidden'
     margin-top: 20px;
 }
 
+/* 计算 el-scrollbar 滚动条正确显示的高度 */
 .scrollbar {
     height: calc(100vh - 40px);
+}
+
+/* 隐藏 el-scrollbar 滚动条 */
+.el-scrollbar ::v-deep .is-vertical{
+    display: none;
 }
 </style>
