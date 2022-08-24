@@ -171,9 +171,4 @@ document.body.style.overflow = 'hidden'
 .scrollbar {
     height: calc(100vh - 40px);
 }
-
-/* 隐藏 el-scrollbar 滚动条 */
-.el-scrollbar ::v-deep .is-vertical{
-    display: none;
-}
 </style>
