@@ -1,37 +1,87 @@
 <template>
     <el-container class="app-wrapper">
-        <el-aside width="320px" class="sidebar-container">
+        <el-aside width="350px" class="sidebar-container">
             <el-scrollbar class="scrollbar">
                 <el-menu
                     class="el-menu-vertical-demo"
-                    :default-active="hello"
-                    active-text-color="#00AF9B"
+                    unique-opened
+                    :active-text-color="activeTextColor"
                 >
-                    <el-menu-item
-                        v-for="name in allList" :key="name" :index="name"
-                        @click="chooseMarkdown(name)"
-                    >
-                        <p class="item">{{ name }}</p>
-                    </el-menu-item>
+                    <el-sub-menu index="hello" @click="clickSubMenu($event)">
+                        <template #title>
+                            <el-icon style="color: #AF52DE">
+                                <InfoFilled/>
+                            </el-icon>
+                            <span class="sub-menu" style="color: #AF52DE">Hello LeetCode !</span>
+                        </template>
+                        <el-menu-item
+                            v-for="name in helloList" :key="name" :index="name"
+                            @click="clickMenuItem(name)"
+                        >
+                            <span class="item">{{ name }}</span>
+                        </el-menu-item>
+                    </el-sub-menu>
+                    <el-sub-menu index="easy" @click="clickSubMenu($event)">
+                        <template #title>
+                            <el-icon style="color: #00AF9B">
+                                <SuccessFilled/>
+                            </el-icon>
+                            <span class="sub-menu" style="color: #00AF9B">Easy Difficulty Note</span>
+                        </template>
+                        <el-menu-item
+                            v-for="name in easyList" :key="name" :index="name"
+                            @click="clickMenuItem(name)"
+                        >
+                            <span class="item">{{ name }}</span>
+                        </el-menu-item>
+                    </el-sub-menu>
+                    <el-sub-menu index="medium" @click="clickSubMenu($event)">
+                        <template #title>
+                            <el-icon style="color: #FFB822">
+                                <WarningFilled/>
+                            </el-icon>
+                            <span class="sub-menu" style="color: #FFB822">Medium Difficulty Note</span>
+                        </template>
+                        <el-menu-item
+                            v-for="name in mediumList" :key="name" :index="name"
+                            @click="clickMenuItem(name)"
+                        >
+                            <span class="item">{{ name }}</span>
+                        </el-menu-item>
+                    </el-sub-menu>
+                    <el-sub-menu index="hard" @click="clickSubMenu($event)">
+                        <template #title>
+                            <el-icon style="color: #FF2D55">
+                                <CircleCloseFilled/>
+                            </el-icon>
+                            <span class="sub-menu" style="color: #FF2D55">Hard Difficulty Note</span>
+                        </template>
+                        <el-menu-item
+                            v-for="name in hardList" :key="name" :index="name"
+                            @click="clickMenuItem(name)"
+                        >
+                            <span class="item">{{ name }}</span>
+                        </el-menu-item>
+                    </el-sub-menu>
                 </el-menu>
                 <div>
+                    <el-tag class="ml-2 tag" type="info" effect="dark" color="#AF52DE" @click="clickTag($event)">
+                        All Difficulty Note Number {{ allNumber }}
+                    </el-tag>
+                </div>
+                <div>
                     <el-tag class="ml-2 tag" type="success" effect="dark" color="#00AF9B" @click="clickTag($event)">
-                        Easy Note Number {{ easyNumber }}
+                        Easy Difficulty Note Number {{ easyNumber }}
                     </el-tag>
                 </div>
                 <div>
                     <el-tag class="ml-2 tag" type="warning" effect="dark" color="#FFB822" @click="clickTag($event)">
-                        Medium Note Number {{ mediumNumber }}
+                        Medium Difficulty Note Number {{ mediumNumber }}
                     </el-tag>
                 </div>
                 <div>
                     <el-tag class="ml-2 tag" type="danger" effect="dark" color="#FF2D55" @click="clickTag($event)">
-                        Hard Note Number {{ hardNumber }}
-                    </el-tag>
-                </div>
-                <div>
-                    <el-tag class="ml-2 tag" type="" effect="dark" color="#AF52DE" @click="clickTag($event)">
-                        All Note Number {{ allNumber }}
+                        Hard Difficulty Note Number {{ hardNumber }}
                     </el-tag>
                 </div>
             </el-scrollbar>
@@ -47,6 +97,9 @@
 <script setup>
 import { ref } from 'vue'
 import { ElNotification } from 'element-plus'
+import {
+    InfoFilled, SuccessFilled, WarningFilled, CircleCloseFilled
+} from '@element-plus/icons-vue'
 
 // 存储所有获取到的 Markdown 文件
 let markdownList = {}
@@ -77,20 +130,11 @@ let easyList = []
 let mediumList = []
 let hardList = []
 
-// 所有 Markdown 文件的文件名
-let allList = []
-
 // 配置 Markdown 组件
 configureComponent(helloComponent, helloList)
 configureComponent(easyComponent, easyList)
 configureComponent(mediumComponent, mediumList)
 configureComponent(hardComponent, hardList)
-
-// 拼接侧边栏需要的文件名列表
-allList = allList.concat(helloList, easyList, mediumList, hardList)
-
-// 文件名排序
-allList = allList.sort()
 
 // 统计不同难度题目的笔记数量
 let easyNumber = easyList.length
@@ -100,14 +144,25 @@ let hardNumber = hardList.length
 // 所有笔记的数量
 let allNumber = easyNumber + mediumNumber + hardNumber
 
-// 默认显示欢迎页
+// 欢迎页
 let hello = '0000.Hello'
 
-// 当前 Markdown 文件的名称
+// 内容区当前显示的 Markdown 文件的名称 (默认显示 hello 欢迎页)
 let markdownName = ref(hello)
 
-// 侧边栏切换 Markdown 文件
-const chooseMarkdown = (name) => {
+let activeTextColor = ref('#AF52DE')
+
+// 侧边栏切换子菜单
+const clickSubMenu = (e) => {
+    let text = e.target.outerText
+    let color = switchTextColor(text.split(' ')[0]).color
+    if (color != null && color !== '') {
+        activeTextColor.value = color
+    }
+}
+
+// 侧边栏切换菜单项
+const clickMenuItem = (name) => {
     markdownName.value = name
 }
 
@@ -115,13 +170,34 @@ const chooseMarkdown = (name) => {
 const clickTag = (e) => {
     // 获取 el-tag 标签上的文本
     let text = e.currentTarget.children[0].outerText
-    // 通知上文本的颜色
+
+    // 根据 text 文本的开头, 获取颜色、通知类型
+    let { type, color } = switchTextColor(text.split(' ')[0])
+
+    // 弹出 el-notification 通知
+    ElNotification({
+        dangerouslyUseHTMLString: true,
+        message: '<span style="color: ' + color + ';">' + text + '</span>',
+        type: type,
+        showClose: false,
+        duration: 5000
+    })
+}
+
+// 按文本获取 ElementUI 相关信息
+const switchTextColor = (text) => {
+    // 文本颜色
     let color = ''
     // 通知类型
     let type = ''
 
-    // 判断点击标签的文本开头
-    switch (text.split(' ')[0]) {
+    // 根据文本设置颜色、通知类型
+    switch (text) {
+        case 'All':
+        case 'Hello':
+            color = '#AF52DE'
+            type = 'info'
+            break
         case 'Easy':
             color = '#00AF9B'
             type = 'success'
@@ -134,22 +210,11 @@ const clickTag = (e) => {
             color = '#FF2D55'
             type = 'error'
             break
-        case 'All':
-            color = '#AF52DE'
-            type = 'info'
-            break
         default:
             break
     }
 
-    // 弹出 el-notification 通知
-    ElNotification({
-        dangerouslyUseHTMLString: true,
-        message: '<span style="color: ' + color + ';">' + text + '</span>',
-        type: type,
-        showClose: false,
-        duration: 5000
-    })
+    return { type, color }
 }
 
 // 禁用浏览器的滚动条
@@ -157,17 +222,27 @@ document.body.style.overflow = 'hidden'
 </script>
 
 <style scoped>
+/* 子菜单 */
+.sub-menu {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* 菜单项 */
 .item {
     font-weight: bold;
     font-size: 16px;
 }
 
+/* 标签 */
 .tag {
     margin-left: 20px;
     margin-top: 20px;
 }
 
+/* 滚动条 */
 .scrollbar {
+    /* 计算 el-scrollbar 滚动条正确显示的高度 */
     height: calc(100vh - 40px);
 }
 </style>
