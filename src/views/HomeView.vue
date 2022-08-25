@@ -12,7 +12,7 @@
                             <el-icon style="color: #AF52DE">
                                 <InfoFilled/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #AF52DE">Hello</span>
+                            <span class="sub-menu" style="color: #AF52DE">Hello LeetCode !</span>
                         </template>
                         <el-menu-item
                             v-for="name in helloList" :key="name" :index="name"
@@ -26,7 +26,7 @@
                             <el-icon style="color: #00AF9B">
                                 <SuccessFilled/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #00AF9B">Easy</span>
+                            <span class="sub-menu" style="color: #00AF9B">Easy Difficulty Note</span>
                         </template>
                         <el-menu-item
                             v-for="name in easyList" :key="name" :index="name"
@@ -40,7 +40,7 @@
                             <el-icon style="color: #FFB822">
                                 <WarningFilled/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #FFB822">Medium</span>
+                            <span class="sub-menu" style="color: #FFB822">Medium Difficulty Note</span>
                         </template>
                         <el-menu-item
                             v-for="name in mediumList" :key="name" :index="name"
@@ -54,7 +54,7 @@
                             <el-icon style="color: #FF2D55">
                                 <CircleCloseFilled/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #FF2D55">Hard</span>
+                            <span class="sub-menu" style="color: #FF2D55">Hard Difficulty Note</span>
                         </template>
                         <el-menu-item
                             v-for="name in hardList" :key="name" :index="name"
@@ -66,22 +66,22 @@
                 </el-menu>
                 <div>
                     <el-tag class="ml-2 tag" type="info" effect="dark" color="#AF52DE" @click="clickTag($event)">
-                        All Note Number {{ allNumber }}
+                        All Difficulty Note Number {{ allNumber }}
                     </el-tag>
                 </div>
                 <div>
                     <el-tag class="ml-2 tag" type="success" effect="dark" color="#00AF9B" @click="clickTag($event)">
-                        Easy Note Number {{ easyNumber }}
+                        Easy Difficulty Note Number {{ easyNumber }}
                     </el-tag>
                 </div>
                 <div>
                     <el-tag class="ml-2 tag" type="warning" effect="dark" color="#FFB822" @click="clickTag($event)">
-                        Medium Note Number {{ mediumNumber }}
+                        Medium Difficulty Note Number {{ mediumNumber }}
                     </el-tag>
                 </div>
                 <div>
                     <el-tag class="ml-2 tag" type="danger" effect="dark" color="#FF2D55" @click="clickTag($event)">
-                        Hard Note Number {{ hardNumber }}
+                        Hard Difficulty Note Number {{ hardNumber }}
                     </el-tag>
                 </div>
             </el-scrollbar>
@@ -155,7 +155,7 @@ let activeTextColor = ref('#AF52DE')
 // 侧边栏切换子菜单
 const clickSubMenu = (e) => {
     let text = e.target.outerText
-    let color = switchTextColor(text).color
+    let color = switchTextColor(text.split(' ')[0]).color
     if (color != null && color !== '') {
         activeTextColor.value = color
     }
@@ -193,6 +193,11 @@ const switchTextColor = (text) => {
 
     // 根据文本设置颜色、通知类型
     switch (text) {
+        case 'All':
+        case 'Hello':
+            color = '#AF52DE'
+            type = 'info'
+            break
         case 'Easy':
             color = '#00AF9B'
             type = 'success'
@@ -204,11 +209,6 @@ const switchTextColor = (text) => {
         case 'Hard':
             color = '#FF2D55'
             type = 'error'
-            break
-        case 'All':
-        case 'Hello':
-            color = '#AF52DE'
-            type = 'info'
             break
         default:
             break
