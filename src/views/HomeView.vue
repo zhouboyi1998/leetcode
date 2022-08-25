@@ -65,23 +65,35 @@
                     </el-sub-menu>
                 </el-menu>
                 <div>
-                    <el-tag class="ml-2 tag" type="info" effect="dark" color="#AF52DE" @click="clickTag($event)">
-                        All Difficulty Note Number {{ allNumber }}
+                    <el-tag
+                        class="ml-2 tag-one" type="info" effect="light" round
+                        @click="clickTag($event)"
+                    >
+                        All Difficulty Note {{ allNumber }}
                     </el-tag>
                 </div>
                 <div>
-                    <el-tag class="ml-2 tag" type="success" effect="dark" color="#00AF9B" @click="clickTag($event)">
-                        Easy Difficulty Note Number {{ easyNumber }}
+                    <el-tag
+                        class="ml-2 tag-two" type="success" effect="light" round
+                        @click="clickTag($event)"
+                    >
+                        Easy Difficulty Note {{ easyNumber }}
                     </el-tag>
                 </div>
                 <div>
-                    <el-tag class="ml-2 tag" type="warning" effect="dark" color="#FFB822" @click="clickTag($event)">
-                        Medium Difficulty Note Number {{ mediumNumber }}
+                    <el-tag
+                        class="ml-2 tag-two" type="warning" effect="light" round
+                        @click="clickTag($event)"
+                    >
+                        Medium Difficulty Note {{ mediumNumber }}
                     </el-tag>
                 </div>
                 <div>
-                    <el-tag class="ml-2 tag" type="danger" effect="dark" color="#FF2D55" @click="clickTag($event)">
-                        Hard Difficulty Note Number {{ hardNumber }}
+                    <el-tag
+                        class="ml-2 tag-two" type="danger" effect="light" round
+                        @click="clickTag($event)"
+                    >
+                        Hard Difficulty Note {{ hardNumber }}
                     </el-tag>
                 </div>
             </el-scrollbar>
@@ -234,10 +246,36 @@ document.body.style.overflow = 'hidden'
     font-size: 16px;
 }
 
-/* 标签 */
-.tag {
+/* 标签1 */
+.tag-one {
     margin-left: 20px;
     margin-top: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    color: #AF52DE;
+    background-color: rgba(175, 82, 222, .1);
+}
+
+/* 标签1: 鼠标悬停 */
+.tag-one:hover {
+    font-size: 15px;
+    background-color: #FFFFFF;
+}
+
+/* 标签2 */
+.tag-two {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* 标签2: 鼠标悬停 */
+.tag-two:hover {
+    font-size: 15px;
+    background-color: #FFFFFF;
 }
 
 /* 滚动条 */
