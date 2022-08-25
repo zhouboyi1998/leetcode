@@ -1,6 +1,6 @@
 <template>
     <el-container class="app-wrapper">
-        <el-aside width="350px" class="sidebar-container">
+        <el-aside width="360px" class="sidebar-container">
             <el-scrollbar class="scrollbar">
                 <el-menu
                     class="el-menu-vertical-demo"
@@ -12,7 +12,9 @@
                             <el-icon style="color: #AF52DE">
                                 <InfoFilled/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #AF52DE">Hello LeetCode !</span>
+                            <span class="sub-menu" style="color: #AF52DE">
+                                Hello LeetCode {{ allNumber }}
+                            </span>
                         </template>
                         <el-menu-item
                             v-for="name in helloList" :key="name" :index="name"
@@ -26,7 +28,9 @@
                             <el-icon style="color: #00AF9B">
                                 <SuccessFilled/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #00AF9B">Easy Difficulty Note</span>
+                            <span class="sub-menu" style="color: #00AF9B">
+                                Easy Difficulty Note {{ easyNumber }}
+                            </span>
                         </template>
                         <el-menu-item
                             v-for="name in easyList" :key="name" :index="name"
@@ -40,7 +44,9 @@
                             <el-icon style="color: #FFB822">
                                 <WarningFilled/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #FFB822">Medium Difficulty Note</span>
+                            <span class="sub-menu" style="color: #FFB822">
+                                Medium Difficulty Note {{ mediumNumber }}
+                            </span>
                         </template>
                         <el-menu-item
                             v-for="name in mediumList" :key="name" :index="name"
@@ -54,7 +60,9 @@
                             <el-icon style="color: #FF2D55">
                                 <CircleCloseFilled/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #FF2D55">Hard Difficulty Note</span>
+                            <span class="sub-menu" style="color: #FF2D55">
+                                Hard Difficulty Note {{ hardNumber }}
+                            </span>
                         </template>
                         <el-menu-item
                             v-for="name in hardList" :key="name" :index="name"
@@ -69,7 +77,7 @@
                         class="ml-2 tag-one" type="info" effect="light" round
                         @click="clickTag($event)"
                     >
-                        All Difficulty Note {{ allNumber }}
+                        Hello LeetCode {{ allNumber }}
                     </el-tag>
                 </div>
                 <div>
