@@ -29,7 +29,7 @@
                                 <SuccessFilled/>
                             </el-icon>
                             <span class="sub-menu" style="color: #00AF9B">
-                                Easy Difficulty Note {{ easyNumber }}
+                                Easy Note {{ easyNumber }}
                             </span>
                         </template>
                         <el-menu-item
@@ -45,7 +45,7 @@
                                 <WarningFilled/>
                             </el-icon>
                             <span class="sub-menu" style="color: #FFB822">
-                                Medium Difficulty Note {{ mediumNumber }}
+                                Medium Note {{ mediumNumber }}
                             </span>
                         </template>
                         <el-menu-item
@@ -61,7 +61,7 @@
                                 <CircleCloseFilled/>
                             </el-icon>
                             <span class="sub-menu" style="color: #FF2D55">
-                                Hard Difficulty Note {{ hardNumber }}
+                                Hard Note {{ hardNumber }}
                             </span>
                         </template>
                         <el-menu-item
@@ -72,43 +72,23 @@
                         </el-menu-item>
                     </el-sub-menu>
                 </el-menu>
-                <div>
-                    <el-tag
-                        class="ml-2 tag-one" type="info" effect="light" round
-                        @click="clickTag($event)"
-                    >
-                        Hello LeetCode {{ allNumber }}
-                    </el-tag>
-                </div>
-                <div>
-                    <el-tag
-                        class="ml-2 tag-two" type="success" effect="light" round
-                        @click="clickTag($event)"
-                    >
-                        Easy Difficulty Note {{ easyNumber }}
-                    </el-tag>
-                </div>
-                <div>
-                    <el-tag
-                        class="ml-2 tag-two" type="warning" effect="light" round
-                        @click="clickTag($event)"
-                    >
-                        Medium Difficulty Note {{ mediumNumber }}
-                    </el-tag>
-                </div>
-                <div>
-                    <el-tag
-                        class="ml-2 tag-two" type="danger" effect="light" round
-                        @click="clickTag($event)"
-                    >
-                        Hard Difficulty Note {{ hardNumber }}
-                    </el-tag>
-                </div>
             </el-scrollbar>
         </el-aside>
         <el-main>
             <el-scrollbar class="scrollbar">
                 <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
+                <el-tag class="ml-2 tag-one" type="info" effect="light" @click="clickTag($event)">
+                    All Note Number {{ allNumber }}
+                </el-tag>
+                <el-tag class="ml-2 tag-two" type="success" effect="light" @click="clickTag($event)">
+                    Easy Note Number {{ easyNumber }}
+                </el-tag>
+                <el-tag class="ml-2 tag-two" type="warning" effect="light" @click="clickTag($event)">
+                    Medium Note Number {{ mediumNumber }}
+                </el-tag>
+                <el-tag class="ml-2 tag-two" type="danger" effect="light" @click="clickTag($event)">
+                    Hard Note Number {{ hardNumber }}
+                </el-tag>
             </el-scrollbar>
         </el-main>
     </el-container>
@@ -256,7 +236,7 @@ document.body.style.overflow = 'hidden'
 
 /* 标签1 */
 .tag-one {
-    margin-left: 20px;
+    margin-right: 20px;
     margin-top: 20px;
     font-weight: bold;
     font-size: 14px;
@@ -273,7 +253,7 @@ document.body.style.overflow = 'hidden'
 
 /* 标签2 */
 .tag-two {
-    margin-left: 20px;
+    margin-right: 20px;
     margin-top: 20px;
     font-weight: bold;
     font-size: 14px;
