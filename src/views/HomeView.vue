@@ -1,6 +1,6 @@
 <template>
     <el-container class="app-wrapper">
-        <el-aside width="360px" class="sidebar-container">
+        <el-aside width="380px" class="sidebar-container">
             <el-scrollbar class="scrollbar">
                 <el-menu
                     class="el-menu-vertical-demo"
@@ -9,8 +9,8 @@
                 >
                     <el-sub-menu index="hello" @click="clickSubMenu($event)">
                         <template #title>
-                            <el-icon style="color: #AF52DE">
-                                <InfoFilled/>
+                            <el-icon>
+                                <InfoFilled :color="helloColor"/>
                             </el-icon>
                             <span class="sub-menu" style="color: #AF52DE">
                                 Hello LeetCode {{ allNumber }}
@@ -25,8 +25,8 @@
                     </el-sub-menu>
                     <el-sub-menu index="easy" @click="clickSubMenu($event)">
                         <template #title>
-                            <el-icon style="color: #00AF9B">
-                                <SuccessFilled/>
+                            <el-icon>
+                                <SuccessFilled :color="easyColor"/>
                             </el-icon>
                             <span class="sub-menu" style="color: #00AF9B">
                                 Easy Note {{ easyNumber }}
@@ -41,8 +41,8 @@
                     </el-sub-menu>
                     <el-sub-menu index="medium" @click="clickSubMenu($event)">
                         <template #title>
-                            <el-icon style="color: #FFB822">
-                                <WarningFilled/>
+                            <el-icon>
+                                <WarningFilled :color="mediumColor"/>
                             </el-icon>
                             <span class="sub-menu" style="color: #FFB822">
                                 Medium Note {{ mediumNumber }}
@@ -57,8 +57,8 @@
                     </el-sub-menu>
                     <el-sub-menu index="hard" @click="clickSubMenu($event)">
                         <template #title>
-                            <el-icon style="color: #FF2D55">
-                                <CircleCloseFilled/>
+                            <el-icon>
+                                <CircleCloseFilled :color="hardColor"/>
                             </el-icon>
                             <span class="sub-menu" style="color: #FF2D55">
                                 Hard Note {{ hardNumber }}
@@ -150,7 +150,13 @@ let hello = '0000.Hello'
 // 内容区当前显示的 Markdown 文件的名称 (默认显示 hello 欢迎页)
 let markdownName = ref(hello)
 
-let activeTextColor = ref('#AF52DE')
+// 颜色
+let helloColor = '#AF52DE'
+let easyColor = '#00AF9B'
+let mediumColor = '#FFB822'
+let hardColor = '#FF2D55'
+
+let activeTextColor = ref(helloColor)
 
 // 侧边栏切换子菜单
 const clickSubMenu = (e) => {
@@ -195,19 +201,19 @@ const switchTextColor = (text) => {
     switch (text) {
         case 'All':
         case 'Hello':
-            color = '#AF52DE'
+            color = helloColor
             type = 'info'
             break
         case 'Easy':
-            color = '#00AF9B'
+            color = easyColor
             type = 'success'
             break
         case 'Medium':
-            color = '#FFB822'
+            color = mediumColor
             type = 'warning'
             break
         case 'Hard':
-            color = '#FF2D55'
+            color = hardColor
             type = 'error'
             break
         default:
