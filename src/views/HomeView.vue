@@ -1,6 +1,6 @@
 <template>
     <el-container class="app-wrapper">
-        <el-aside width="360px" class="sidebar-container">
+        <el-aside width="380px" class="sidebar-container">
             <el-scrollbar class="scrollbar">
                 <el-menu
                     class="el-menu-vertical-demo"
