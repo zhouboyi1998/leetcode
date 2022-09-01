@@ -1,0 +1,8 @@
+@import "./variable";
+
+:export {
+    helloColor: $hello-color;
+    easyColor: $easy-color;
+    mediumColor: $medium-color;
+    hardColor: $hard-color;
+}
