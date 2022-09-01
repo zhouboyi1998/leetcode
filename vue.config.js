@@ -1,4 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
+
 module.exports = defineConfig({
     transpileDependencies: true,
     // 开发配置
@@ -9,7 +10,9 @@ module.exports = defineConfig({
     },
     // Webpack 配置
     chainWebpack: config => {
-        config.module.rule('md')
+        // Vue 加载 Markdown 的配置
+        config.module
+            .rule('md')
             .test(/\.md/)
             .use('vue-loader')
             .loader('vue-loader')
