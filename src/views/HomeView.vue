@@ -1,6 +1,6 @@
 <template>
     <el-container class="app-wrapper">
-        <el-aside width="380px" class="sidebar-container">
+        <el-aside width="360px" class="sidebar-container">
             <el-scrollbar class="scrollbar">
                 <el-menu
                     class="el-menu-vertical-demo"
@@ -12,7 +12,7 @@
                             <el-icon>
                                 <InfoFilled :color="helloColor"/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #AF52DE">
+                            <span class="sub-menu" :style="{ color: helloColor }">
                                 Hello LeetCode {{ allNumber }}
                             </span>
                         </template>
@@ -28,7 +28,7 @@
                             <el-icon>
                                 <SuccessFilled :color="easyColor"/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #00AF9B">
+                            <span class="sub-menu" :style="{ color: easyColor }">
                                 Easy Note {{ easyNumber }}
                             </span>
                         </template>
@@ -44,7 +44,7 @@
                             <el-icon>
                                 <WarningFilled :color="mediumColor"/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #FFB822">
+                            <span class="sub-menu" :style="{ color: mediumColor }">
                                 Medium Note {{ mediumNumber }}
                             </span>
                         </template>
@@ -60,7 +60,7 @@
                             <el-icon>
                                 <CircleCloseFilled :color="hardColor"/>
                             </el-icon>
-                            <span class="sub-menu" style="color: #FF2D55">
+                            <span class="sub-menu" :style="{ color: hardColor }">
                                 Hard Note {{ hardNumber }}
                             </span>
                         </template>
@@ -100,6 +100,7 @@ import { ElNotification } from 'element-plus'
 import {
     InfoFilled, SuccessFilled, WarningFilled, CircleCloseFilled
 } from '@element-plus/icons-vue'
+import variable from '@/assets/style/variable.module.scss'
 
 // 存储所有获取到的 Markdown 文件
 let markdownList = {}
@@ -150,12 +151,13 @@ let hello = '0000.Hello'
 // 内容区当前显示的 Markdown 文件的名称 (默认显示 hello 欢迎页)
 let markdownName = ref(hello)
 
-// 颜色
-let helloColor = '#AF52DE'
-let easyColor = '#00AF9B'
-let mediumColor = '#FFB822'
-let hardColor = '#FF2D55'
+// 从 SCSS 中获取颜色
+const helloColor = variable.helloColor
+const easyColor = variable.easyColor
+const mediumColor = variable.mediumColor
+const hardColor = variable.hardColor
 
+// 菜单项颜色
 let activeTextColor = ref(helloColor)
 
 // 侧边栏切换子菜单
@@ -163,6 +165,7 @@ const clickSubMenu = (e) => {
     let text = e.target.outerText
     let color = switchTextColor(text.split(' ')[0]).color
     if (color != null && color !== '') {
+        // 菜单项颜色与其所在的子菜单颜色一致
         activeTextColor.value = color
     }
 }
@@ -227,54 +230,6 @@ const switchTextColor = (text) => {
 document.body.style.overflow = 'hidden'
 </script>
 
-<style scoped>
-/* 子菜单 */
-.sub-menu {
-    font-weight: bold;
-    font-size: 16px;
-}
+<style lang="scss" scoped>
 
-/* 菜单项 */
-.item {
-    font-weight: bold;
-    font-size: 16px;
-}
-
-/* 标签1 */
-.tag-one {
-    margin-right: 20px;
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 14px;
-    cursor: pointer;
-    color: #AF52DE;
-    background-color: rgba(175, 82, 222, .1);
-}
-
-/* 标签1: 鼠标悬停 */
-.tag-one:hover {
-    font-size: 15px;
-    background-color: #FFFFFF;
-}
-
-/* 标签2 */
-.tag-two {
-    margin-right: 20px;
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-/* 标签2: 鼠标悬停 */
-.tag-two:hover {
-    font-size: 15px;
-    background-color: #FFFFFF;
-}
-
-/* 滚动条 */
-.scrollbar {
-    /* 计算 el-scrollbar 滚动条正确显示的高度 */
-    height: calc(100vh - 40px);
-}
 </style>
