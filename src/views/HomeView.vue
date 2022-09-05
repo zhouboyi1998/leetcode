@@ -5,6 +5,7 @@
                 <el-menu
                     class="el-menu-vertical-demo"
                     unique-opened
+                    :default-active="markdownName"
                     :active-text-color="activeTextColor"
                 >
                     <el-sub-menu index="hello" @click="clickSubMenu($event)">
@@ -96,11 +97,15 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useMarkdownStore } from '@/store/markdown'
 import { ElNotification } from 'element-plus'
 import {
     InfoFilled, SuccessFilled, WarningFilled, CircleCloseFilled
 } from '@element-plus/icons-vue'
 import variable from '@/assets/style/variable.module.scss'
+
+// 获取 Pinia 仓库
+const markdownStore = useMarkdownStore()
 
 // 存储所有获取到的 Markdown 文件
 let markdownList = {}
@@ -145,11 +150,8 @@ let hardNumber = hardList.length
 // 所有笔记的数量
 let allNumber = easyNumber + mediumNumber + hardNumber
 
-// 欢迎页
-let hello = '0000.Hello'
-
-// 内容区当前显示的 Markdown 文件的名称 (默认显示 hello 欢迎页)
-let markdownName = ref(hello)
+// 内容区当前显示的 Markdown 文件的名称
+let markdownName = ref(markdownStore.name)
 
 // 从 SCSS 中获取颜色
 const helloColor = variable.helloColor
@@ -157,22 +159,30 @@ const easyColor = variable.easyColor
 const mediumColor = variable.mediumColor
 const hardColor = variable.hardColor
 
-// 菜单项颜色
-let activeTextColor = ref(helloColor)
+// 当前菜单项 (menu-item) 颜色
+let activeTextColor = ref(markdownStore.color)
+
+// 当前子菜单 (sub-menu) 颜色
+let subMenuColor = markdownStore.color
 
 // 侧边栏切换子菜单
 const clickSubMenu = (e) => {
     let text = e.target.outerText
     let color = switchTextColor(text.split(' ')[0]).color
     if (color != null && color !== '') {
-        // 菜单项颜色与其所在的子菜单颜色一致
-        activeTextColor.value = color
+        // 保存当前选中的子菜单 (sub-menu) 颜色
+        subMenuColor = color
     }
 }
 
 // 侧边栏切换菜单项
 const clickMenuItem = (name) => {
-    markdownName.value = name
+    // 保存当前选中的 Markdown 文件名和当前子菜单 (sub-menu) 颜色
+    markdownStore.$patch({ name: name, color: subMenuColor })
+    // 获取 Markdown 文件名
+    markdownName.value = markdownStore.name
+    // 点击子菜单并且点击菜单项后, 将当前菜单项 (menu-item) 颜色改变为当前子菜单 (sub-menu) 颜色
+    activeTextColor.value = markdownStore.color
 }
 
 // 点击 Tag 标签触发通知
