@@ -13,7 +13,7 @@
         font-size: 15px;
     }
 
-    // 标签1
+    // hello 标签
     .tag-one {
         margin-right: 20px;
         margin-top: 20px;
@@ -22,27 +22,27 @@
         cursor: pointer;
         color: $hello-color;
         background-color: $hello-background-color;
+
+        // 鼠标悬停
+        &:hover {
+            font-size: 15px;
+            background-color: $light-gray-color;
+        }
     }
 
-    // 标签1: 鼠标悬停
-    .tag-one:hover {
-        font-size: 15px;
-        background-color: $white-color;
-    }
-
-    // 标签2
+    // easy / medium / hard 标签
     .tag-two {
         margin-right: 20px;
         margin-top: 20px;
         font-weight: bold;
         font-size: 14px;
         cursor: pointer;
-    }
 
-    // 标签2: 鼠标悬停
-    .tag-two:hover {
-        font-size: 15px;
-        background-color: $white-color;
+        // 鼠标悬停
+        &:hover {
+            font-size: 15px;
+            background-color: $light-gray-color;
+        }
     }
 
     // 滚动条
