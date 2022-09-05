@@ -8,6 +8,8 @@
 <img src="https://img.shields.io/badge/license-MIT-red"> 
 </a>
 <img src="https://img.shields.io/badge/Vue-3.2.13-mediumseagreen">
+<img src="https://img.shields.io/badge/Vue Router-4.0.3-mediumseagreen">
+<img src="https://img.shields.io/badge/Pinia-2.0.21-yellow">
 <img src="https://img.shields.io/badge/Element Plus-2.2.13-blue">
 <img src="https://img.shields.io/badge/GitHub Markdown CSS-5.1.0-lightgray">
 <img src="https://img.shields.io/badge/Highlight.js-11.6.0-darkred">
