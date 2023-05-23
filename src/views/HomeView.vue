@@ -102,7 +102,7 @@ import { ElNotification } from 'element-plus'
 import {
     InfoFilled, SuccessFilled, WarningFilled, CircleCloseFilled
 } from '@element-plus/icons-vue'
-import variable from '@/assets/style/variable.module.scss'
+import variable from '@/style/variable.module.scss'
 
 // 获取 Pinia 仓库
 const markdownStore = useMarkdownStore()
@@ -240,6 +240,6 @@ const switchTextColor = (text) => {
 document.body.style.overflow = 'hidden'
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 
 </style>
