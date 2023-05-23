@@ -1,16 +1,11 @@
 const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
+    // 编译依赖包中的代码
     transpileDependencies: true,
-    // 开发配置
-    devServer: {
-        host: '127.0.0.1',
-        port: 18003,
-        open: true
-    },
     // Webpack 配置
     chainWebpack: config => {
-        // Vue 加载 Markdown 的配置
+        // 加载 Markdown 的配置到 Vue 中
         config.module
             .rule('md')
             .test(/\.md/)
@@ -27,8 +22,14 @@ module.exports = defineConfig({
             // SASS 配置
             sass: {
                 // 全局引入样式文件
-                additionalData: `@import "@/assets/style/variable.scss";`
+                additionalData: `@import "@/style/variable.scss";`
             }
         }
+    },
+    // 开发配置
+    devServer: {
+        host: '127.0.0.1',
+        port: 18003,
+        open: true
     }
 })
