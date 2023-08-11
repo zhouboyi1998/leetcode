@@ -13,33 +13,44 @@
         font-size: 15px;
     }
 
-    // hello 标签
-    .tag-one {
-        margin-right: 20px;
-        margin-top: 20px;
-        font-weight: bold;
-        font-size: 14px;
-        cursor: pointer;
-        color: $hello-color;
-        background-color: $hello-background-color;
+    // 头部右侧区域
+    .header-right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
 
-        // 鼠标悬停
-        &:hover {
-            background-color: $light-gray-color;
+        // hello 标签
+        .tag-one {
+            margin-right: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            color: $hello-color;
+            background-color: $hello-background-color;
+
+            // 鼠标悬停
+            &:hover {
+                background-color: $light-gray-color;
+            }
         }
-    }
 
-    // easy / medium / hard 标签
-    .tag-two {
-        margin-right: 20px;
-        margin-top: 20px;
-        font-weight: bold;
-        font-size: 14px;
-        cursor: pointer;
+        // easy / medium / hard 标签
+        .tag-two {
+            margin-right: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
 
-        // 鼠标悬停
-        &:hover {
-            background-color: $dark-gray-color;
+            // 鼠标悬停
+            &:hover {
+                background-color: $dark-gray-color;
+            }
+        }
+
+        // 全屏按钮
+        .screen-full-container {
+            margin-right: 10px;
         }
     }
 

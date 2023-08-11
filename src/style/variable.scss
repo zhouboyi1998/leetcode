@@ -1,6 +1,9 @@
 $hello-color: #AF52DE;
+// 简单颜色
 $easy-color: #00AF9B;
+// 中等颜色
 $medium-color: #FFB822;
+// 困难颜色
 $hard-color: #FF2D55;
 
 $hello-background-color: rgba(175, 82, 222, .1);
@@ -8,3 +11,6 @@ $hello-background-color: rgba(175, 82, 222, .1);
 $white-color: #FFFFFF;
 $light-gray-color: #C0C0C0;
 $dark-gray-color: #808080;
+
+// 头部组件大小
+$header-icon-size: 28px;
