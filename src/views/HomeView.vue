@@ -65,18 +65,21 @@
         </el-aside>
         <el-container>
             <el-header>
-                <el-tag class="ml-2 tag-one" type="info" effect="light" @click="clickTag($event)">
-                    All Note Number {{ allNumber }}
-                </el-tag>
-                <el-tag class="ml-2 tag-two" type="success" effect="light" @click="clickTag($event)">
-                    Easy Note Number {{ easyNumber }}
-                </el-tag>
-                <el-tag class="ml-2 tag-two" type="warning" effect="light" @click="clickTag($event)">
-                    Medium Note Number {{ mediumNumber }}
-                </el-tag>
-                <el-tag class="ml-2 tag-two" type="danger" effect="light" @click="clickTag($event)">
-                    Hard Note Number {{ hardNumber }}
-                </el-tag>
+                <div class="header-right">
+                    <el-tag class="ml-2 tag-one" type="info" effect="light" @click="clickTag($event)">
+                        All Note Number {{ allNumber }}
+                    </el-tag>
+                    <el-tag class="ml-2 tag-two" type="success" effect="light" @click="clickTag($event)">
+                        Easy Note Number {{ easyNumber }}
+                    </el-tag>
+                    <el-tag class="ml-2 tag-two" type="warning" effect="light" @click="clickTag($event)">
+                        Medium Note Number {{ mediumNumber }}
+                    </el-tag>
+                    <el-tag class="ml-2 tag-two" type="danger" effect="light" @click="clickTag($event)">
+                        Hard Note Number {{ hardNumber }}
+                    </el-tag>
+                    <ScreenFull/>
+                </div>
             </el-header>
             <el-main>
                 <el-scrollbar class="content-scrollbar">
@@ -91,9 +94,8 @@
 import { ref } from 'vue'
 import { useMarkdownStore } from '@/store/markdown'
 import { ElNotification } from 'element-plus'
-import {
-    InfoFilled, SuccessFilled, WarningFilled, CircleCloseFilled
-} from '@element-plus/icons-vue'
+import { InfoFilled, SuccessFilled, WarningFilled, CircleCloseFilled } from '@element-plus/icons-vue'
+import ScreenFull from '@/views/header/ScreenFull'
 import variable from '@/style/variable.module.scss'
 
 // 获取 Pinia 仓库
