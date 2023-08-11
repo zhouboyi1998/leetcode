@@ -1,13 +1,11 @@
 <template>
     <el-container class="app-wrapper">
         <el-aside width="360px" class="sidebar-container">
-            <el-scrollbar class="scrollbar">
-                <el-menu
-                    class="el-menu-vertical-demo"
-                    unique-opened
-                    :default-active="markdownName"
-                    :active-text-color="activeTextColor"
-                >
+            <el-scrollbar class="sidebar-scrollbar">
+                <el-menu class="el-menu-vertical-demo"
+                         unique-opened
+                         :default-active="markdownName"
+                         :active-text-color="activeTextColor">
                     <el-sub-menu index="hello" @click="clickSubMenu($event)">
                         <template #title>
                             <el-icon>
@@ -17,10 +15,7 @@
                                 Hello LeetCode {{ allNumber }}
                             </span>
                         </template>
-                        <el-menu-item
-                            v-for="name in helloList" :key="name" :index="name"
-                            @click="clickMenuItem(name)"
-                        >
+                        <el-menu-item v-for="name in helloList" :key="name" :index="name" @click="clickMenuItem(name)">
                             <span class="item">{{ name }}</span>
                         </el-menu-item>
                     </el-sub-menu>
@@ -33,10 +28,7 @@
                                 Easy Note {{ easyNumber }}
                             </span>
                         </template>
-                        <el-menu-item
-                            v-for="name in easyList" :key="name" :index="name"
-                            @click="clickMenuItem(name)"
-                        >
+                        <el-menu-item v-for="name in easyList" :key="name" :index="name" @click="clickMenuItem(name)">
                             <span class="item">{{ name }}</span>
                         </el-menu-item>
                     </el-sub-menu>
@@ -49,10 +41,7 @@
                                 Medium Note {{ mediumNumber }}
                             </span>
                         </template>
-                        <el-menu-item
-                            v-for="name in mediumList" :key="name" :index="name"
-                            @click="clickMenuItem(name)"
-                        >
+                        <el-menu-item v-for="name in mediumList" :key="name" :index="name" @click="clickMenuItem(name)">
                             <span class="item">{{ name }}</span>
                         </el-menu-item>
                     </el-sub-menu>
@@ -67,17 +56,15 @@
                         </template>
                         <el-menu-item
                             v-for="name in hardList" :key="name" :index="name"
-                            @click="clickMenuItem(name)"
-                        >
+                            @click="clickMenuItem(name)">
                             <span class="item">{{ name }}</span>
                         </el-menu-item>
                     </el-sub-menu>
                 </el-menu>
             </el-scrollbar>
         </el-aside>
-        <el-main>
-            <el-scrollbar class="scrollbar">
-                <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
+        <el-container>
+            <el-header>
                 <el-tag class="ml-2 tag-one" type="info" effect="light" @click="clickTag($event)">
                     All Note Number {{ allNumber }}
                 </el-tag>
@@ -90,8 +77,13 @@
                 <el-tag class="ml-2 tag-two" type="danger" effect="light" @click="clickTag($event)">
                     Hard Note Number {{ hardNumber }}
                 </el-tag>
-            </el-scrollbar>
-        </el-main>
+            </el-header>
+            <el-main>
+                <el-scrollbar class="content-scrollbar">
+                    <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
+                </el-scrollbar>
+            </el-main>
+        </el-container>
     </el-container>
 </template>
 
