@@ -1,4 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
+const IconPlugin = require('unplugin-icons/webpack')
 
 module.exports = defineConfig({
     // 编译依赖包中的代码
@@ -15,6 +16,12 @@ module.exports = defineConfig({
             .use('vue-markdown-loader')
             .loader('vue-markdown-loader/lib/markdown-compiler')
             .options({ raw: true })
+    },
+    configureWebpack: {
+        plugins: [
+            // 自动下载图标配置
+            IconPlugin({ compiler: 'vue3', autoInstall: true })
+        ]
     },
     // CSS 配置
     css: {
