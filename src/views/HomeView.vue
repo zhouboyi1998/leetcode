@@ -9,7 +9,7 @@
                     <el-sub-menu index="hello" @click="clickSubMenu($event)">
                         <template #title>
                             <el-icon>
-                                <InfoFilled :color="helloColor"/>
+                                <Info :color="helloColor"/>
                             </el-icon>
                             <span class="sub-menu" :style="{ color: helloColor }">
                                 Hello LeetCode {{ allNumber }}
@@ -22,7 +22,7 @@
                     <el-sub-menu index="easy" @click="clickSubMenu($event)">
                         <template #title>
                             <el-icon>
-                                <SuccessFilled :color="easyColor"/>
+                                <Mood :color="easyColor"/>
                             </el-icon>
                             <span class="sub-menu" :style="{ color: easyColor }">
                                 Easy Note {{ easyNumber }}
@@ -35,7 +35,7 @@
                     <el-sub-menu index="medium" @click="clickSubMenu($event)">
                         <template #title>
                             <el-icon>
-                                <WarningFilled :color="mediumColor"/>
+                                <SentimentNeutral :color="mediumColor"/>
                             </el-icon>
                             <span class="sub-menu" :style="{ color: mediumColor }">
                                 Medium Note {{ mediumNumber }}
@@ -48,7 +48,7 @@
                     <el-sub-menu index="hard" @click="clickSubMenu($event)">
                         <template #title>
                             <el-icon>
-                                <CircleCloseFilled :color="hardColor"/>
+                                <MoodBad :color="hardColor"/>
                             </el-icon>
                             <span class="sub-menu" :style="{ color: hardColor }">
                                 Hard Note {{ hardNumber }}
@@ -94,7 +94,10 @@
 import { ref } from 'vue'
 import { useMarkdownStore } from '@/store/markdown'
 import { ElNotification } from 'element-plus'
-import { InfoFilled, SuccessFilled, WarningFilled, CircleCloseFilled } from '@element-plus/icons-vue'
+import Info from '~icons/material-symbols/info-rounded'
+import Mood from '~icons/material-symbols/mood-rounded'
+import SentimentNeutral from '~icons/material-symbols/sentiment-neutral-rounded'
+import MoodBad from '~icons/material-symbols/mood-bad-rounded'
 import ScreenFull from '@/views/header/ScreenFull'
 import variable from '@/style/variable.module.scss'
 
