@@ -1,4 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
+const IconPlugin = require('unplugin-icons/webpack')
 
 module.exports = defineConfig({
     // 禁用对依赖包的转译处理
@@ -17,6 +18,13 @@ module.exports = defineConfig({
             .options({
                 raw: true
             })
+    },
+    // Webpack 配置
+    configureWebpack: {
+        plugins: [
+            // 自动下载图标配置
+            IconPlugin({ compiler: 'vue3', autoInstall: true })
+        ]
     },
     // CSS 配置
     css: {
