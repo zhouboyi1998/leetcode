@@ -12,7 +12,7 @@
                                 <Info :color="helloColor"/>
                             </el-icon>
                             <span class="sub-menu" :style="{ color: helloColor }">
-                                Hello LeetCode {{ allNumber }}
+                                LeetCode {{ allNumber }}
                             </span>
                         </template>
                         <el-menu-item v-for="name in helloList" :key="name" :index="name" @click="clickMenuItem(name)">
@@ -25,7 +25,7 @@
                                 <Mood :color="easyColor"/>
                             </el-icon>
                             <span class="sub-menu" :style="{ color: easyColor }">
-                                Easy Note {{ easyNumber }}
+                                Easy {{ easyNumber }}
                             </span>
                         </template>
                         <el-menu-item v-for="name in easyList" :key="name" :index="name" @click="clickMenuItem(name)">
@@ -38,7 +38,7 @@
                                 <SentimentNeutral :color="mediumColor"/>
                             </el-icon>
                             <span class="sub-menu" :style="{ color: mediumColor }">
-                                Medium Note {{ mediumNumber }}
+                                Medium {{ mediumNumber }}
                             </span>
                         </template>
                         <el-menu-item v-for="name in mediumList" :key="name" :index="name" @click="clickMenuItem(name)">
@@ -51,7 +51,7 @@
                                 <MoodBad :color="hardColor"/>
                             </el-icon>
                             <span class="sub-menu" :style="{ color: hardColor }">
-                                Hard Note {{ hardNumber }}
+                                Hard {{ hardNumber }}
                             </span>
                         </template>
                         <el-menu-item
@@ -67,16 +67,16 @@
             <el-header>
                 <div class="header-right">
                     <el-tag class="ml-2 tag-one" type="info" effect="light" @click="clickTag($event)">
-                        All Note Number {{ allNumber }}
+                        All {{ allNumber }}
                     </el-tag>
                     <el-tag class="ml-2 tag-two" type="success" effect="light" @click="clickTag($event)">
-                        Easy Note Number {{ easyNumber }}
+                        Easy {{ easyNumber }}
                     </el-tag>
                     <el-tag class="ml-2 tag-two" type="warning" effect="light" @click="clickTag($event)">
-                        Medium Note Number {{ mediumNumber }}
+                        Medium {{ mediumNumber }}
                     </el-tag>
                     <el-tag class="ml-2 tag-two" type="danger" effect="light" @click="clickTag($event)">
-                        Hard Note Number {{ hardNumber }}
+                        Hard {{ hardNumber }}
                     </el-tag>
                     <ScreenFull/>
                 </div>
@@ -192,11 +192,18 @@ const clickTag = (e) => {
 
     // 弹出 el-notification 通知
     ElNotification({
-        dangerouslyUseHTMLString: true,
+        // 通知内容
         message: '<span style="color: ' + color + ';">' + text + '</span>',
+        // 是否将 message 属性作为 HTML 片段处理
+        dangerouslyUseHTMLString: true,
+        // 通知类型
         type: type,
+        // 显示时间 (单位: 毫秒)
+        duration: 5000,
+        // 是否显示关闭按钮
         showClose: false,
-        duration: 5000
+        // 通知位置相对屏幕顶部的偏移量
+        offset: 40
     })
 }
 
@@ -210,7 +217,7 @@ const switchTextColor = (text) => {
     // 根据文本设置颜色、通知类型
     switch (text) {
         case 'All':
-        case 'Hello':
+        case 'LeetCode':
             color = helloColor
             type = 'info'
             break
