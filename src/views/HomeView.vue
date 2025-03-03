@@ -82,7 +82,7 @@
                 </div>
             </el-header>
             <el-main>
-                <el-scrollbar class="content-scrollbar">
+                <el-scrollbar class="content-scrollbar" ref="contentScrollbar">
                     <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
                 </el-scrollbar>
             </el-main>
@@ -172,6 +172,17 @@ const clickSubMenu = (e) => {
     }
 }
 
+// 内容区滚动条
+const contentScrollbar = ref(null)
+
+// 重置内容区滚动条
+const resetContentScrollbar = () => {
+    if (contentScrollbar.value != null) {
+        // 将内容区滚动条重置回顶部
+        contentScrollbar.value.$el.querySelector('.el-scrollbar__wrap').scrollTop = 0
+    }
+}
+
 // 侧边栏切换菜单项
 const clickMenuItem = (name) => {
     // 保存当前选中的 Markdown 文件名和当前子菜单 (sub-menu) 颜色
@@ -180,6 +191,9 @@ const clickMenuItem = (name) => {
     markdownName.value = markdownStore.name
     // 点击子菜单并且点击菜单项后, 将当前菜单项 (menu-item) 颜色改变为当前子菜单 (sub-menu) 颜色
     activeTextColor.value = markdownStore.color
+
+    // 重置内容区滚动条
+    resetContentScrollbar()
 }
 
 // 点击 Tag 标签触发通知
