@@ -180,6 +180,12 @@ const clickMenuItem = (name) => {
     markdownName.value = markdownStore.name
     // 点击子菜单并且点击菜单项后, 将当前菜单项 (menu-item) 颜色改变为当前子菜单 (sub-menu) 颜色
     activeTextColor.value = markdownStore.color
+
+    // 将内容区滚动条重置回顶部
+    const contentScrollbar = document.querySelector('.content-scrollbar .el-scrollbar__wrap')
+    if (contentScrollbar != null) {
+        contentScrollbar.scrollTop = 0
+    }
 }
 
 // 点击 Tag 标签触发通知
