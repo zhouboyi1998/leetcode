@@ -83,7 +83,9 @@
             </el-header>
             <el-main>
                 <el-scrollbar class="content-scrollbar" ref="contentScrollbar">
-                    <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
+                    <div class="markdown-wrapper">
+                        <component class="markdown-body" v-bind:is="markdownList[markdownName]"/>
+                    </div>
                 </el-scrollbar>
             </el-main>
         </el-container>
@@ -91,7 +93,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { useMarkdownStore } from '@/store/markdown'
 import { ElNotification } from 'element-plus'
 import Info from '~icons/material-symbols/info-rounded'
@@ -195,6 +197,91 @@ const clickMenuItem = (name) => {
     // 重置内容区滚动条
     resetContentScrollbar()
 }
+
+// 使用原生事件监听来处理 Markdown 中的链接点击
+const handleGlobalClick = (e) => {
+    const link = e.target.closest('.markdown-body a')
+    if (!link) return
+
+    let href = link.getAttribute('href')
+    if (!href) return
+
+    // 解码 URL (处理中文字符)
+    try {
+        href = decodeURIComponent(href)
+    } catch (err) {
+        console.error('Failed to decode href:', err)
+        return
+    }
+
+    // 检查是否是 Markdown 文件的相对路径链接
+    const match = href.match(/^(?:\.\.\/(easy|medium|hard)|\.)\/(.+)\.md$/)
+    if (match) {
+        e.preventDefault()
+        e.stopPropagation()
+        const [, difficulty, name] = match
+
+        // 需要从当前上下文或文件名判断难度
+        let targetDifficulty = difficulty
+        if (!targetDifficulty) {
+            // 同难度内跳转, 需要判断目标题目属于哪个难度
+            if (easyList.includes(name)) {
+                targetDifficulty = 'easy'
+            } else if (mediumList.includes(name)) {
+                targetDifficulty = 'medium'
+            } else if (hardList.includes(name)) {
+                targetDifficulty = 'hard'
+            } else if (helloList.includes(name)) {
+                targetDifficulty = 'hello'
+            }
+        }
+
+        // 计算目标难度对应的颜色
+        const targetColor = switchTextColor(targetDifficulty.charAt(0).toUpperCase() + targetDifficulty.slice(1)).color
+
+        // 更新 store 和显示的题目
+        markdownStore.$patch({ name: name, color: targetColor })
+        markdownName.value = name
+        activeTextColor.value = targetColor
+        subMenuColor = targetColor
+
+        // 重置内容区滚动条
+        resetContentScrollbar()
+    }
+}
+
+// 绑定事件到 markdown-body 容器
+let contentContainer = null
+
+const bindClickEvent = async () => {
+    await nextTick()
+    contentContainer = document.querySelector('.markdown-body')
+    if (contentContainer) {
+        contentContainer.addEventListener('click', handleGlobalClick, true)
+    }
+}
+
+const unbindClickEvent = () => {
+    if (contentContainer) {
+        contentContainer.removeEventListener('click', handleGlobalClick, true)
+    }
+}
+
+// 组件挂载时添加事件监听
+onMounted(() => {
+    bindClickEvent()
+})
+
+// 组件卸载时移除事件监听
+onUnmounted(() => {
+    unbindClickEvent()
+})
+
+// 监听 markdownName 变化, 重新绑定事件
+watch(markdownName, () => {
+    unbindClickEvent()
+    bindClickEvent()
+})
 
 // 点击 Tag 标签触发通知
 const clickTag = (e) => {
